@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>API Fiddle</title>
+  </head>
+  <body>
+    <h1>API fiddle</h1>
+    <p>
+      If you want an API mock sever without docker or other tools,
+    </p>
+    <script>
+     const id = sessionStorage.getItem('id');
+     if (id != null) {
+       location.href = '/' + id;
+     } else {
+       fetch('/new', {
+         method: 'POST',
+       })
+         .then(response => response.json())
+         .then(data => {
+           sessionStorage.setItem('id', data.id);
+           location.reload();
+         });
+     }
+    </script>
+  </body>
+</html>
